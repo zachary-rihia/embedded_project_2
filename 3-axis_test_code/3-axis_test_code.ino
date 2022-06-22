@@ -11,11 +11,13 @@ void setup(void) {
   while (!Serial) delay(10);     // will pause Zero, Leonardo, etc until serial console opens
 
   Serial.println("Adafruit MSA301 test!");
-  
+
   // Try to initialize!
   if (! msa.begin()) {
     Serial.println("Failed to find MSA301 chip");
-    while (1) { delay(10); }
+    while (1) {
+      delay(10);
+    }
   }
   Serial.println("MSA301 Found!");
 
@@ -79,22 +81,22 @@ void setup(void) {
 void loop() {
   msa.read();      // get X Y and Z data at once
   // Then print out the raw data
-  Serial.print("X:  "); Serial.print(msa.x); 
-  Serial.print("  \tY:  "); Serial.print(msa.y); 
-  Serial.print("  \tZ:  "); Serial.print(msa.z); 
-  delay(100); 
-  
-  /* Or....get a new sensor event, normalized */ 
-  sensors_event_t event; 
+  Serial.print("X:  "); Serial.print(msa.x);
+  Serial.print("  \tY:  "); Serial.print(msa.y);
+  Serial.print("  \tZ:  "); Serial.print(msa.z);
+  delay(100);
+
+  /* Or....get a new sensor event, normalized */
+  sensors_event_t event;
   msa.getEvent(&event);
-  
+
   /* Display the results (acceleration is measured in m/s^2) */
   Serial.print("\t\tX: "); Serial.print(event.acceleration.x);
-  Serial.print(" \tY: "); Serial.print(event.acceleration.y); 
-  Serial.print(" \tZ: "); Serial.print(event.acceleration.z); 
+  Serial.print(" \tY: "); Serial.print(event.acceleration.y);
+  Serial.print(" \tZ: "); Serial.print(event.acceleration.z);
   Serial.println(" m/s^2 ");
 
   Serial.println();
- 
-  delay(100); 
+
+  delay(100);
 }
